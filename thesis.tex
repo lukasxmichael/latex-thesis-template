@@ -1,5 +1,5 @@
 \documentclass[
-	11pt, 
+	12pt, % Changed from 11pt to 12pt
 	a4paper, 
 	twoside,
 	parskip=half*, % Line spacing for paragraphs
@@ -13,9 +13,9 @@
 ]{scrbook}
 
 \usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
+\usepackage[english]{babel} % Changed from ngerman to english
 \usepackage{url}
-\usepackage[autostyle=true,german=quotes]{csquotes}
+\usepackage[autostyle=true]{csquotes} % English quotes will be used automatically
 \usepackage[T1]{fontenc}
 \usepackage{pdfpages}
 \usepackage{textcomp}
@@ -28,12 +28,12 @@
   pdftex,
   pdfauthor={Jon Doe},
   pdftitle={Thesis Template},
-  pdfsubject={Bachelorthesis},
+  pdfsubject={Bachelor Thesis}, % Changed from German
   pdfkeywords={Thesis;Template;LaTeX},
   pdfproducer={LaTeX},
   pdfcreator={pdfLaTeX},
   pdfduplex={DuplexFlipLongEdge}, %Alt.: Simplex or DuplexFlipShortEdge 
-  pdflang={de}, % en
+  pdflang={en}, % Changed from de to en
   bookmarksopen,
   bookmarksnumbered,
 ]{hyperref}
@@ -41,7 +41,14 @@
 % ------------------
 % |    Settings    |
 % ------------------
+% Enhanced preamble section for true APA compliance
+% 1. Font setup (APA prefers Times New Roman) - OPTIONAL
+% \usepackage{newtxtext,newtxmath} % Uncomment for Times-like fonts
+
+% 2. Load bibliography settings AFTER hyperref
 \input{settings/bibliography.tex}
+
+% 3. Load other settings
 \input{settings/graphics.tex}
 \input{settings/tables.tex}
 \input{settings/colors.tex}
@@ -50,6 +57,14 @@
 \input{settings/links.tex}
 \input{settings/commands}
 \input{settings/bookmarks}
+
+% 4. Additional APA-compliant settings
+\makeatletter
+% Ensure proper handling of citations
+\AtBeginDocument{%
+  \renewcommand{\cite}{\parencite}% Make \cite behave like \parencite
+}
+\makeatother
 
 \begin{document}
 
@@ -64,7 +79,7 @@
 % |    Abstract    |
 % ------------------
 \cleardoubleoddpage	
-\pdfbookmark[section]{Kurzfassung}{abstract} % Abstract as bookmark
+\pdfbookmark[section]{Abstract}{abstract} % Changed from Kurzfassung
 \input{chapters/abstract}
 \input{chapters/eid}
 
@@ -114,9 +129,9 @@
 % |    Bibliography    |
 % ----------------------
 \printbibliography
-% \printbibheading[title=Literatur]
+% \printbibheading[title=Literature]
 % \printbibliography[heading=subbibliography, type=online, title={Online}]
-% \printbibliography[heading=subbibliography, type=book, title={Literatur}]
-% \printbibliography[heading=subbibliography,title={Der ganze Rest},nottype=online,notkeyword=Norm,notkeyword=sekundaer]
+% \printbibliography[heading=subbibliography, type=book, title={Literature}]
+% \printbibliography[heading=subbibliography,title={Other Sources},nottype=online,notkeyword=Norm,notkeyword=sekundaer]
 
 \end{document}

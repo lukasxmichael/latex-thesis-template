@@ -1,53 +1,13 @@
-\chapter{Einleitung}
+\chapter{Introduction}
+\label{introduction}
 \setcounter{page}{1}
-Lorem ipsum dolor sit amet \parencite[vgl.][215]{Bloggs2013}, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-\section{Unterabschnitt}
-\textcite{Doe2015} beschreibt in seinem Ansatz\footcite{Doe2015}, dass sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat \parencite[vgl.][26]{Doe2015}.
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua\footnote{Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.}. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+The new issue premium (NIP) represents a well-documented phenomenon in fixed-income markets where newly issued bonds are priced at a discount to comparable outstanding securities, creating potential excess returns for investors who participate in primary market offerings. While extensive research has established the existence of this premium across various credit segments, with particular emphasis on high-yield securities \parencite{Geerts2022PredictingYield}, a significant gap remains in understanding how predictive modeling can systematically identify new issue premium opportunities within the European investment-grade corporate bond market.
 
-\begin{figure}[h]
-    \includegraphics[width=\textwidth, height=\textheight,keepaspectratio]{imageName}
-    \caption[Beispielbild (Abbildungsverzeichnis)]{Beispielbild} 
-    \label{fig:imageYouCanReferTo}
-\end{figure}
+Existing literature demonstrates that the magnitude of new issue premiums varies considerably across credit quality segments, with high-yield bonds typically exhibiting the most substantial premiums while investment-grade securities show more modest and inconsistent patterns \parencite{TraczykNewFactor}. This characteristic poses particular challenges for investment-grade focused strategies, where the lower base rate of outperforming issuances necessitates more sophisticated selection methodologies to generate meaningful excess returns. Despite the documented presence of new issue premiums in investment-grade markets, no systematic machine learning approach has been developed specifically for European investment-grade corporate bonds that transforms issuer and market characteristics into actionable investment signals.
 
-In \autoref{fig:imageYouCanReferTo} kann man sehr gut erkennen, dass es sich um ein Beispielbild handelt. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Current industry practice in fixed-income investment teams centers on participating in new issuances as a primary strategy for generating portfolio returns through new issue premium capture. The conventional approach typically employs relative valuation frameworks that position potential investments within peer group comparisons, often visualized through scatter plot analyses plotting maturity against credit spreads to identify bonds trading wider than comparable securities\footnote{This observation is based on personal experience during an internship with a fixed-income investment team in 2024.}. While this methodology incorporates substantial manual research, institutional experience, and qualitative assessments, it frequently limits quantitative analysis to a narrow set of immediately observable characteristics at the time of issuance. The decision-making process predominantly relies on subjective judgments and experience-based evaluations, potentially overlooking systematic patterns present in comprehensive historical datasets. Given the extensive availability of past bond issuance data and the demonstrated effectiveness of machine learning algorithms in binary classification tasks, significant opportunities exist to enhance traditional selection methodologies through automated, systematic approaches that can serve as initial screening mechanisms to complement existing analytical frameworks.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+This research addresses the fundamental question of whether machine learning algorithms can reliably predict new issue premium opportunities in European investment-grade corporate bonds and whether such predictions can form the basis for enhanced investment decision-making processes. The investigation employs a comprehensive dataset of 7,320 European investment-grade corporate bond issuances extracted from Refinitiv's fixed-income database, spanning the period from 2000 to 2025. Through systematic feature engineering incorporating both microeconomic bond characteristics and macroeconomic market conditions, a predictive framework using Extreme Gradient Boosting (XGBoost) is developed that classifies bonds according to their likelihood of short-term outperformance.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\bgroup
-\def\arraystretch{2}
-\begin{table}[h]
-\centering
-\caption{Beispieltabelle}
-\label{tbl:libs}
-\begin{tabular}{|l|l@{\hspace{2em}}|l@{\hspace{2em}}|}
-\hline
-\diagbox{Punkt 1}{Punkt 2}  & Beispiel & Beispiel     \\ \hline
-Beispiel & Beispiel & Beispiel \\ \hline
-Beispiel     & Beispiel  & Beispiel        \\ \hline
-\end{tabular}
-\end{table}
-\egroup
-
-\section{Unterabschnitt}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=300px, height=\textheight,keepaspectratio]{imageName}
-    \caption[weiteres Beispielbild]{Beispielbild}
-    \label{fig:sampleImage}
-\end{figure}
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\section{Unterabschnitt}
-\textcolor{editorOcher}{Lorem ipsum dolor} sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+This research contributes to the fixed-income literature in three principal ways. First, it demonstrates the viability of machine learning approaches for systematic new issue premium identification in European investment-grade markets, extending existing methodologies beyond traditional high-yield applications to more conservative credit segments. Second, it identifies and validates specific microeconomic and macroeconomic features that exhibit predictive power for short-term bond performance, providing practical insights for fixed-income portfolio management. Third, it presents a systematic framework that translates machine learning predictions into actionable investment signals, offering portfolio managers enhanced tools for alpha generation while maintaining appropriate risk controls in institutional investment environments.

@@ -1,30 +1,28 @@
+% True APA 7th Edition Bibliography Setup
 \usepackage[
-    backend=biber, 
-    style=authoryear-icomp, % alphabetic
-    citestyle=authoryear-icomp, % alphabetic, authortitle
-    date=short,
-    % backref=true, % Display pages on which the reference is used
-    maxnames=1, % affects the cites
-    maxbibnames=3, % affects the bibliography
-    pagetracker=true,
-    isbn=false,    
-    % block=ragged, % break urls
-    % firstinits=true, % shorten first names
-    backrefstyle=three+ % Combine pages
+    backend=biber,
+    style=apa,
+    citestyle=apa,
+    sortcites=true,
+    sorting=nyt,
+    hyperref=true,
+    backref=false,
+    natbib=false
 ]{biblatex}
 
-% Distance between bibliographical references
-\setlength{\bibitemsep}{.5em}
+% Language mapping for APA style
+\DeclareLanguageMapping{ngerman}{ngerman-apa}
+% For English: \DeclareLanguageMapping{american}{american-apa}
 
-% Indentation after the first line
-\setlength{\bibhang}{2em}
-
-% URL in the bibliography is in angle brackets
-\DeclareFieldFormat{url}{<\url{#1}>}
-
-% break too long urls
+% URL breaking settings
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
 
-% Source of the bibliography file
-\bibliography{sources/literature.bib}
+% APA hanging indent (0.5 inch standard)
+\setlength{\bibhang}{0.5in}
+
+% Reduce space between entries (optional)
+\setlength{\bibitemsep}{6pt}
+
+% Add your bibliography file
+\addbibresource{sources/literature.bib}

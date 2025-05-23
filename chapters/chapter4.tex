@@ -1,4 +1,191 @@
-\chapter{Ergebnisse}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+\chapter{Feature Research}
+\label{ch:feature_research}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+This chapter examines the determinants of the new issue premium (NIP) in EUR Investment Grade Corporate Bonds. The analysis identifies and evaluates features at both the microeconomic and macroeconomic levels that systematically predict short-term outperformance of newly issued bonds. Building on established research in high-yield markets \parencite{Geerts2022PredictingYield}, this investigation adapts and extends these methodologies to the investment-grade segment, where the NIP phenomenon operates under different dynamics. Through rigorous statistical testing and feature importance measurements, a comprehensive set of predictive variables is developed to form the foundation of the predictive model.
+
+\section{Microeconomic Features}
+
+Microeconomic features capture bond-specific characteristics and issuer attributes that influence pricing dynamics and subsequent performance in the secondary market. These features reflect the fundamental risk-return properties of individual bonds and the information asymmetry between issuers and investors \parencite{Geerts2022PredictingYield}. The following sections analyze the most relevant microeconomic determinants of the new issue premium.
+
+\subsection{First-Time Issuer}
+Investors need to allocate research capacity to familiarize themselves with the risks and opportunities associated with first-time issuers. This additional effort often translates into a premium in the primary market. First-time issuers must compensate investors for the uncertainty and information asymmetry inherent in the absence of a trading history \parencite{Geerts2022PredictingYield}. Empirical evidence from the EUR investment-grade bond market confirms this hypothesis. When examining new issuances in a binary fashion (first-time vs. seasoned issuers), a significant first-time issuer premium emerges:
+
+$$\text{FTI Premium} = E[XR]_{\text{first-time}} - E[XR]_{\text{seasoned}} \approx 34 \text{ basis points}$$
+
+The strong contrast between the positive average excess return of first-time issuers (+23.94 bp) and the negative return of seasoned issuers (-10.23 bp) underscores the economic significance of this feature. Statistical analysis reveals strong significance at the 1\% level, confirming the robustness of the first-time issuer effect in predicting new issue premium.
+
+\begin{figure}[h]
+    \begin{center}
+        \input{images/FTI.pgf}
+    \end{center}
+    \caption{First-time issuer effect showing excess returns for first-time vs. seasoned issuers}
+    \label{fig:data_availability}
+\end{figure}
+
+\subsection{Credit Risk Indicators}
+
+\subsection{}{Coupon}
+The coupon rate represents both the periodic interest payment to bondholders and serves as a proxy for credit risk. Higher coupons often signal elevated risk profiles, limiting the potential investor base \parencite{Geerts2022PredictingYield}. The relationship between coupon rates and excess returns was found to be statistically significant at the 5\% level. Interestingly, the relationship does not appear strictly monotonic when analyzed categorically. Bonds in the lowest and highest coupon quintiles tend to outperform those in middle quintiles. This non-linear pattern suggests that factors beyond simple risk compensation may be at play, possibly including liquidity considerations or market segmentation effects.
+
+\subsubsection{}{Z-Spread}
+The Z-spread represents the constant yield spread over the zero-coupon Treasury yield curve required to discount a bond's cash flows to match its current market price. It provides a more comprehensive risk assessment than nominal spreads by accounting for the bond's entire payment structure across different maturities \parencite[pp. 816 - 818]{Fabozzi2021TheEdition}. Due to the inconsistent availability of Z-spread data, an approximation was used:
+
+$$Z \approx I = \text{YTM} - s_T$$
+
+Where $I$ is the I-spread, YTM is the yield to maturity, and $s_T$ is the linearly interpolated swap rate based on maturity. The yield to maturity itself was approximated as:
+
+\begin{align}
+\text{ytm} &\approx \frac{2(c+ \frac{100-p}{T})}{100+p} \\
+\text{where} \quad p &: \text{Issue price} \nonumber\\
+c &: \text{Coupon} \nonumber\\
+T &: \text{Maturity} \nonumber
+\end{align}
+
+Two derived Z-spread features were analyzed:
+
+\begin{enumerate}
+    \item Z-spread rank among sector peers
+    \item Distance to benchmark spread curve, defined as:
+    $$\Delta Z = Z - Z_B(d)$$
+    where $d$ is the estimated spread duration
+\end{enumerate}
+
+The Z-spread feature demonstrated strong statistical significance at the 1\% level, with Z-spread ranked in sector also showing significance. The spread premium exhibits an interesting pattern when plotted against excess returns by quintiles. Bonds in the middle (third) quintile showed the highest excess returns (+8.87 bp), while those in the lowest quintile significantly underperformed (-25.32 bp).
+
+\begin{figure}[h]
+    \begin{center}
+        \input{images/zPremium.pgf}
+    \end{center}
+    \caption{Z-spread distance quintile vs. excess returns (bp)}
+    \label{fig:data_availability}
+\end{figure}
+
+This non-monotonic relationship aligns with recent research by \textcite{Dickerson2024Factor}, who found that bonds with extremely wide spreads tend to underperform relative to moderately high-spread peers in the near term. This may occur because "cheap" high-spread issues carry elevated downgrade risk and lower liquidity, eroding their short-term return advantage.
+
+\subsubsection{}{Credit Rating}
+Credit ratings provide standardized assessments of issuer default risk \parencite[pp. 26 - 28]{Fabozzi2021TheEdition}. Analysis of the EUR investment-grade market reveals that credit rating is a significant predictor of excess returns at the 1\% level.
+
+The relationship between credit rating and excess returns shows that bonds at the lower end of investment grade (BBB- category) tend to offer higher excess returns compared to higher-rated issues. This pattern reflects the risk premium investors demand for holding bonds closer to the investment-grade/high-yield boundary, where the consequences of potential downgrades are most severe.
+
+\subsection{Macaulay Duration}
+Macaulay Duration captures the weighted average time until a bond's cash flows are received, measuring a bond's sensitivity to interest rate changes. When credit spreads compress, the duration effect mechanically increases bond prices—the higher the duration, the larger this effect \parencite[pp. 118 - 123]{Fabozzi2021TheEdition}.
+
+The Macaulay Duration was calculated using the formula:
+
+\begin{align}
+MD &= \frac{\sum_{t=1}^{n} t \cdot CF_t \cdot (1 + \text{ytm})^{-t}}{\sum_{t=1}^{n} CF_t \cdot (1 + \text{ytm})^{-t}} \\
+\text{where} \quad t &: \text{Time to cash flow} \nonumber\\
+CF_t &: \text{Cash flow at time $t$} \nonumber\\
+\text{ytm} &: \text{Yield to maturity} \nonumber\\
+n &: \text{Number of periods} \nonumber
+\end{align}
+
+Assuming a negative change in spread $\Delta s < 0$, the expected price change $E[\%\Delta P] = -D \cdot \Delta s$ is positively related to duration. Statistical analysis revealed significance at the 5\% level, and a generally monotonic relationship between duration quintiles and excess returns was observed, with longer-duration bonds providing higher excess returns.
+
+\subsection{Liquidity Metrics}
+Bond liquidity is an important determinant of investor demand and subsequent price performance. Following \textcite{Hotchkiss2002TheAnalysis}, who identified absolute par value outstanding as a critical determinant of liquidity, issue size was incorporated as a feature. Statistical analysis showed a significant negative correlation between issue size and excess returns, confirming the expectation that smaller-sized issues demand a liquidity premium. A composite liquidity score was developed, based on issue size and bid-ask spread:
+
+$$\text{Liquidity Score} = \frac{\ln(\text{Issue Size})}{\text{Bid-Ask Spread}}$$
+
+This metric captures non-linear liquidity effects through logarithmic size scaling while inversely weighting transaction costs. This approach is validated by \textcite{Reichenbacher2018UniversityDiscussant}, who demonstrate that size-adapted liquidity measures significantly improve explanatory power in asset pricing models. The liquidity score exhibited statistical significance at the 5\% level and showed a distinctive inverted U-shaped pattern when plotted against excess returns. Bonds in the lowest liquidity quintile significantly underperformed, while those in moderate liquidity quintiles (quintile 2 and 3) exhibited the highest positive returns.
+
+\subsection{Price at Issuance}
+In the investment-grade market, bonds issued at a significant discount typically signal a stressed environment where the underwriter is "sweetening" the offer to attract investors. This implies an additional premium to compensate for perceived risks \parencite{Geerts2022PredictingYield}.
+
+The analysis revealed a strong negative information coefficient (IC) between price and excess returns, with a significant t-statistic at the 1\% level. Bonds in the lowest price quintile (largest discount) exhibited significantly better short-term excess returns (+12.33 bp) compared to bonds in the highest price quintile (-37.54 bp).
+
+\subsection{Bond Seniority}
+Bond seniority represents the claim priority in the capital structure and directly impacts recovery rates in default scenarios \parencite[pp. 682 - 683]{Fabozzi2021TheEdition}. To analyze the contribution of seniority to excess returns, bonds were categorized into five mutually exclusive seniority-based risk categories: Senior Secured, Senior Unsecured, Senior Preferred, Subordinated, and Junior Subordinated.
+
+The analysis revealed that Senior Preferred bonds exhibit the most negative expected excess returns (-44.32 bp), while Junior Subordinated bonds command the highest positive premium (+4.70 bp). Interestingly, Senior Secured bonds also display negative expected excess returns (-14.35 bp), contrary to what might be expected from their top position in the capital structure. Senior Unsecured bonds demonstrated the strongest feature importance by leading the permutation importance ranking.
+
+\subsection{Geographic Region}
+Regional factors can introduce market segmentation effects that influence new issue pricing and performance \parencite{Geerts2022PredictingYield}. The analysis investigated two aspects of geographic influence:
+
+\begin{enumerate}
+    \item Region of issuance (US vs. Europe)
+    \item Country of risk exposure (US, EUR, UK, Other)
+\end{enumerate}
+
+Regression analysis of the region of issuance against excess returns revealed a significant positive information coefficient for US-issued bonds compared to European-issued bonds. The t-statistic indicates statistical significance at the 1\% level.
+
+When examining country of risk exposure, US risk exposure contributed positively to excess returns, while European risk exposure contributed negatively.
+
+\section{Macroeconomic Features}
+
+Macroeconomic features capture broader market conditions that influence investor sentiment, risk appetite, and capital flows. These systematic factors provide essential context for predicting short-term performance of new bond issues in varying market environments \parencite{Geerts2022PredictingYield}. The following sections analyze the most relevant macroeconomic determinants of the new issue premium.
+
+\subsection{January Effect}
+The January effect is a well-documented calendar anomaly in financial markets where securities tend to exhibit stronger performance in January compared to other months \parencite{Nisar2021MunichArchive}. For corporate bonds, this effect has specific underpinnings related to market structure and investor behavior.
+
+Investors typically build cash reserves during the last two weeks of December due to multiple factors: coupon payments, bond redemptions, reduced primary market activity, and limited secondary market liquidity. When the new year begins, issuers tend to tap the primary market while investors actively deploy accumulated cash, often increasing risk allocations as the calendar resets for performance measurement \parencite{Nisar2021MunichArchive}.
+
+The analysis defined the January effect as a binary feature, assigning 1 for bonds issued in December or January and 0 otherwise. Statistical testing revealed significance at the 5\% level, with bonds issued during this period experiencing approximately 1.89 basis points higher excess returns compared to bonds issued in other months.
+
+$$\text{January Premium} = E[XR]_{\text{Jan/Dec}} - E[XR]_{\text{other months}} \approx 1.89 \text{ basis points}$$
+
+\subsection{Consumer Consumption Index}
+
+The European Consumer Consumption Index serves as a proxy for economic health and consumer spending patterns. Statistical analysis confirmed this hypothesis, with consumption showing a significant negative relationship with excess returns at the 1\% level.
+
+The categorical analysis demonstrated a clear pattern: bonds issued during periods of low consumption (first quintile) showed moderate negative returns (-5.51 bp), while those issued during the highest consumption periods (fifth quintile) experienced the most negative excess returns (-21.26 bp). Notably, bonds issued during the second quintile of consumption exhibited positive excess returns (+5.18 bp), creating a non-monotonic relationship.
+
+\begin{figure}[h]
+    \begin{center}
+        \input{images/consumption.pgf}
+    \end{center}
+    \caption{Consumption effect on excess returns}
+    \label{fig:consumption}
+\end{figure}
+
+\subsection{Market Volatility}
+
+Market volatility, measured by the Euro Stoxx 50 Volatility Index, captures investor uncertainty and risk perception. Volatility often correlates with risk aversion, liquidity premiums, and flight-to-quality dynamics that can impact new issue pricing \parencite{Thank2004FlightRisk}.
+
+The analysis revealed an interesting non-monotonic relationship between volatility and excess returns. Bonds issued during periods of very low volatility (first quintile) experienced significantly negative excess returns, while those issued during periods of moderate volatility (second and third quintiles) showed better performance. Returns declined again for bonds issued during high volatility periods. While volatility did not show statistical significance for excess returns, it was significant for total returns at the 5\% level and demonstrated moderate permutation importance.
+
+\subsection{Market Direction Indicators}
+
+\subsubsection{European Investment Grade Market Direction}
+The direction of the broader European investment grade market, measured as the 5-day trailing total return of the FTSE EU IG Corporate Bond Index, provides important context for new issue pricing and subsequent performance. The feature tests whether recent market momentum influences investor demand for new issues. Statistical analysis confirmed significance at the 1\% level for the relationship with total returns. When analyzed by quintiles, bonds issued following strongly positive market returns (fifth quintile) exhibited the most negative excess returns, while those issued after moderately positive returns (third quintile) performed better.
+
+\subsubsection{European Equity Market Direction}
+Similar to bond market direction, equity market momentum (measured as the 5-day trailing total return of the Euro Stoxx 50 Index) captures broader risk sentiment that may affect new issue pricing and performance. The feature was statistically significant at the 1\% level for total returns and ranked in the upper quartile for permutation importance.
+
+When plotted against excess return quintiles, equity market direction showed a pattern similar to bond market direction: bonds issued after strongly positive equity market performance (fifth quintile) showed the worst excess returns, while those issued after moderately positive performance performed better.
+
+\begin{figure}[h]
+    \begin{center}
+        \input{images/european_market_direction.pgf}
+    \end{center}
+    \caption{Market direction effect on excess returns}
+    \label{fig:eu_direction}
+\end{figure}
+
+\subsection{Inflation Indicators}
+
+The analysis incorporated an inflation feature based on European inflation metrics to capture macroeconomic conditions that influence interest rates, risk premiums, and investor sentiment. Statistical analysis confirmed significance at the 1\% level, with pronounced effects on excess returns.
+
+Bonds issued during periods of low inflation (first quintile) exhibited positive excess returns, while those issued during high inflation periods (fifth quintile) showed significantly negative excess returns. This pattern aligns with economic theory, as high inflation typically corresponds with monetary tightening, rising yields, and underperformance of fixed-income securities.
+
+\section{Features Removed from the Model}
+
+Several features were evaluated but not included in the final model due to statistical insignificance, low feature importance, or potential for overfitting.
+
+\subsection{Microeconomic Features}
+
+\begin{itemize}
+    \item \textbf{Average Issuer Coupon}: While providing a meaningful comparison of issuer cost of funding relative to market averages, this feature showed neither statistical significance nor strong feature importance, suggesting limited incremental value beyond the direct coupon feature.
+    \item \textbf{Z-Distance}: Despite its theoretical foundation, the distance to benchmark spread curve demonstrated weaker predictive power compared to other spread-related metrics, likely due to noisy estimations in thinly traded sector segments.
+    \item \textbf{Subordinated Seniority Categories}: The hot-encoded features for Subordinated and Junior Subordinated bonds were removed due to statistical insignificance and low permutation importance, with their information likely captured by other seniority categories and credit risk metrics.
+    \item \textbf{Region UK}: The UK region category showed weak statistical significance and low permutation importance, suggesting limited relevance for predicting excess returns in the predominantly EUR-focused dataset.
+\end{itemize}
+
+\subsection{Macroeconomic Features}
+
+\begin{itemize}
+    \item \textbf{Consumer Confidence}: Unlike consumption metrics, confidence indicators showed neither statistical relevance nor strong feature importance, suggesting that actual economic activity (consumption) provides more predictive signal than sentiment measures.
+    \item \textbf{Quiet Period Issuance}: This feature attempted to capture premium associated with bonds that "open up" the market after periods of low issuance. Despite theoretical support from high-yield research \parencite{Geerts2022PredictingYield}, it did not demonstrate statistical significance in the EUR investment grade universe.
+\end{itemize}
+
+The exclusion of these features resulted in a more parsimonious model with 21 features, improving generalization capabilities while maintaining strong predictive performance. The final feature set represents a balanced combination of micro and macro determinants that effectively capture both issuer-specific characteristics and broader market conditions influencing new issue premium in the EUR investment grade corporate bond market.

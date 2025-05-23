@@ -1,28 +1,21 @@
-% True APA 7th Edition Bibliography Setup
-\usepackage[
-    backend=biber,
-    style=apa,
-    citestyle=apa,
-    sortcites=true,
-    sorting=nyt,
-    hyperref=true,
-    backref=false,
-    natbib=false
-]{biblatex}
+\usepackage[backend=biber,style=apa]{biblatex}
 
-% Language mapping for APA style
-\DeclareLanguageMapping{ngerman}{ngerman-apa}
-% For English: \DeclareLanguageMapping{american}{american-apa}
+\addbibresource{references.bib}
 
-% URL breaking settings
+\usepackage[american]{babel}
+
+
+\DeclareLanguageMapping{american}{american-apa}
+
+% Keep URL breaking settings
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
 
-% APA hanging indent (0.5 inch standard)
+% Distance between bibliographical references (optional adjustment)
+\setlength{\bibitemsep}{0pt}
+
+% Indentation after the first line (APA uses hanging indent)
 \setlength{\bibhang}{0.5in}
 
-% Reduce space between entries (optional)
-\setlength{\bibitemsep}{6pt}
-
-% Add your bibliography file
+% Source of the bibliography file
 \addbibresource{sources/literature.bib}

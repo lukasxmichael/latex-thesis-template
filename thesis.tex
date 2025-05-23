@@ -1,80 +1,90 @@
 \documentclass[
-	12pt,
+	12pt, 
 	a4paper, 
 	twoside,
-	parskip=half*,
-	openright,
-	listof=totoc,
-	bibliography=totoc,
-	index=totoc,
-	toc=chapterentrywithdots,
-	numbers=noenddot
+	parskip=half*, % Line spacing for paragraphs
+	openright,  % openany -> on which page should new chapters start
+	listof=totoc, % Include listings in the table of contents
+	bibliography=totoc, % adding a bibliography to the table of contents
+	index=totoc, % add index directory to the table of contents
+  toc=chapterentrywithdots, % Set dots in the table of contents also for chapters
+  numbers=noenddot, % removes the last dot after X.X.X.
+  %chapterprefix=true % changes the display of the chapter, adds "Chapter" to the chapter number
 ]{scrbook}
+\input{settings/bookmarks}
 
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+\usepackage[american]{babel}
 \usepackage{url}
-\usepackage[autostyle=true]{csquotes}
+\usepackage[autostyle=true,german=quotes]{csquotes}
+\usepackage[T1]{fontenc}
 \usepackage{pdfpages}
 \usepackage{textcomp}
-\usepackage{amsmath}
+\usepackage{amsmath} % math environment
+\usepackage{fontspec} % required for unicode-math
+\usepackage{unicode-math} % for \mathdefault in PGF figures
+\usepackage{siunitx} % for \uselengthunit and \printlength
 
-% ------------------
-% |    Settings    |
-% ------------------
-% Load settings in correct order to avoid conflicts
-\input{settings/colors.tex}
-\input{settings/layout.tex}
-\input{settings/graphics.tex}
-\input{settings/tables.tex}
-\input{settings/listings.tex}
-\input{settings/commands.tex}
-\input{settings/bookmarks.tex}
+\providecommand{\mathdefault}{\mathnormal} % compatibility for PGF figures
+\usepackage{csquotes}
+
+\usepackage[backend=biber,style=apa,citestyle=apa,autolang=other]{biblatex} % for \parentcite and other citation commands
+\providecommand{\mathdefault}[1]{#1} % fallback for PGF figures
+\usepackage{pgf} % for pgf figures
+
+\usepackage{layouts}
+\usepackage{caption}
+
+\addbibresource{references.bib}
+\addbibresource{sources/literature.bib}
+\usepackage{lmodern}
 
 % ---------------------------
 % |    Meta-Data for PDF    |
 % ---------------------------
-\usepackage[
-  pdftex,
-  pdfauthor={Jon Doe},
-  pdftitle={Thesis Template},
+\usepackage{hyperref}
+\hypersetup{
+  pdfauthor={Lukas Michael},
+  pdftitle={Machine Learning for Systematic New Issue Premium Identification and Portfolio Optimization in European Corporate Bond Markets},
   pdfsubject={Bachelor Thesis},
-  pdfkeywords={Thesis;Template;LaTeX},
+  pdfkeywords={Machine Learning; XGBoost; New Issue Premium; European Corporate Bonds; Investment-Grade; Portfolio Optimization; Fixed Income; Systematic Investing; Feature Engineering; Classification Algorithm; Short-term Excess Returns},
   pdfproducer={LaTeX},
-  pdfcreator={pdfLaTeX},
-  pdfduplex={DuplexFlipLongEdge},
-  pdflang={en},
-  bookmarksopen,
-  bookmarksnumbered,
-]{hyperref}
+}
 
-% Load links settings after hyperref
+
+% ------------------
+% |    Settings    |
+% ------------------
+
+\input{settings/graphics.tex}
+\input{settings/tables.tex}
+\input{settings/colors.tex}
+\input{settings/layout.tex}
+\input{settings/listings.tex}
 \input{settings/links.tex}
+\input{settings/commands}
 
-% Load bibliography settings AFTER hyperref
-\input{settings/bibliography.tex}
+
+\addbibresource{references.bib}
 
 \begin{document}
 
 % -------------------
 % |    Titlepage    |
 % -------------------
-\includepdf[pages={1},offset=25 -40]{chapters/deckblatt.pdf}
-
+\includepdf[pages=1]{chapters/cover_sheet.pdf}
 % ------------------
 % |    Abstract    |
 % ------------------
-\cleardoubleoddpage	
-\pdfbookmark[section]{Abstract}{abstract}
+%\cleardoubleoddpage	
+\pdfbookmark[section]{Kurzfassung}{abstract} % Abstract as bookmark
 \input{chapters/abstract}
-\input{chapters/eid}
 
 % ---------------------------
 % |    Table of contents    |
 % ---------------------------
-\cleardoubleoddpage	
-\pdfbookmark[section]{\contentsname}{toc}
+%\cleardoubleoddpage	
+\pdfbookmark[section]{\contentsname}{toc} % toc is part of the bookmarks but not part the toc itself
 \newpage\thispagestyle{empty}
 {
   \pagestyle{empty}
@@ -90,7 +100,6 @@
 \pagenumbering{Roman}
 \listoffigures
 \listoftables
-\lstlistoflistings 
 
 % ------------------
 % |    Chapters    |
@@ -102,12 +111,13 @@
 \input{chapters/chapter3}
 \input{chapters/chapter4}
 \input{chapters/chapter5}
+\input{chapters/chapter6}
 
 % ------------------
 % |    Appendix    |
 % ------------------
 \appendix
-\cleardoubleoddpage
+%\cleardoubleoddpage
 \pagenumbering{Roman}
 \setcounter{page}{7}
 \input{chapters/appendix}
@@ -115,6 +125,17 @@
 % ----------------------
 % |    Bibliography    |
 % ----------------------
-\printbibliography[heading=bibintoc,title={References}]
+
+\printbibliography[title=References]
+% \printbibliography[heading=subbibliography, type=online, title={Online}]
+% \printbibliography[heading=subbibliography, type=book, title={Literatur}]
+% \printbibliography[heading=subbibliography,title={Der ganze Rest},nottype=online,notkeyword=Norm,notkeyword=sekundaer]
+
+% ----------------------
+% |    Declarations    |
+% ----------------------
+\input{chapters/ai}
+\input{chapters/eid}
+
 
 \end{document}

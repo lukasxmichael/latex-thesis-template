@@ -1,62 +1,8 @@
-% Graphics and figure packages
+% graphics
 \usepackage{graphicx}
-\usepackage{float}
+\graphicspath{ {images/} }
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.gif}
+
+% captions
 \usepackage{caption}
 \usepackage{subcaption}
-
-% Math packages for symbols like \mathbb
-\usepackage{amsfonts}
-\usepackage{amssymb}
-
-% PGF/TikZ packages
-\usepackage{tikz}
-\usepackage{pgfplots}
-\usepackage{pgf}
-
-% Fix for matplotlib PGF files (pdfLaTeX compatible)
-\makeatletter
-\@ifundefined{mathdefault}{%
-  \newcommand{\mathdefault}[1]{#1}%
-}{}
-\@ifundefined{mathrm}{%
-  \newcommand{\mathrm}[1]{\textrm{#1}}%
-}{}
-\@ifundefined{mathbf}{%
-  \newcommand{\mathbf}[1]{\textbf{#1}}%
-}{}
-\@ifundefined{mathit}{%
-  \newcommand{\mathit}[1]{\textit{#1}}%
-}{}
-\makeatother
-
-% TikZ libraries (add as needed)
-\usetikzlibrary{arrows}
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{positioning}
-\usetikzlibrary{shapes}
-\usetikzlibrary{patterns}
-\usetikzlibrary{decorations.markings}
-\usetikzlibrary{calc}
-
-% PGFPlots settings
-\pgfplotsset{compat=1.18}
-\pgfplotsset{width=10cm,compat=1.18}
-
-% Graphics path (specify where your images are stored)
-\graphicspath{{figures/}{images/}{graphics/}}
-
-% Default figure placement
-\makeatletter
-\def\fps@figure{htbp}
-\def\fps@table{htbp}
-\makeatother
-
-% Caption settings for APA compliance
-\captionsetup{
-    format=plain,
-    labelsep=period,
-    font=small,
-    labelfont=bf,
-    justification=justified,
-    singlelinecheck=false
-}

@@ -7,7 +7,7 @@
 	index=totoc,
 	toc=chapterentrywithdots,
 	numbers=noenddot,
-]{scrbook}
+]{scrreprt}  % Changed from scrbook to scrreprt
 
 % Essential packages and settings
 \input{settings/bookmarks}
@@ -75,14 +75,12 @@
 % ---------------------------
 \pdfbookmark[section]{\contentsname}{toc}
 \tableofcontents
-\clearpage
 
 % -----------------
 % |    Indexes    |
 % -----------------
 \listoffigures
 \listoftables
-\clearpage
 
 % ------------------
 % |    Chapters    |

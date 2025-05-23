@@ -1,21 +1,17 @@
-\usepackage[backend=biber,style=apa]{biblatex}
+% Bibliography settings file
 
-\addbibresource{references.bib}
-
-\usepackage[american]{babel}
-
-
+% Language mapping for APA style
 \DeclareLanguageMapping{american}{american-apa}
 
-% Keep URL breaking settings
+% URL breaking configuration for bibliography entries
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
 
-% Distance between bibliographical references (optional adjustment)
+% Bibliography entry spacing configuration
 \setlength{\bibitemsep}{0pt}
 
-% Indentation after the first line (APA uses hanging indent)
+% Hanging indent configuration for APA style
 \setlength{\bibhang}{0.5in}
 
-% Source of the bibliography file
-\addbibresource{sources/literature.bib}
+% Additional bibliography formatting options can be added here
+% without conflicting with the main package declaration

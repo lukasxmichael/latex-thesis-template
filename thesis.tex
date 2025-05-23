@@ -1,25 +1,36 @@
 \documentclass[
-	12pt, % Changed from 11pt to 12pt
+	12pt,
 	a4paper, 
 	twoside,
-	parskip=half*, % Line spacing for paragraphs
-	openright,  % openany -> on which page should new chapters start
-	listof=totoc, % Include listings in the table of contents
-	bibliography=totoc, % adding a bibliography to the table of contents
-	index=totoc, % add index directory to the table of contents
-  toc=chapterentrywithdots, % Set dots in the table of contents also for chapters
-  numbers=noenddot, % removes the last dot after X.X.X.
-  %chapterprefix=true % changes the display of the chapter, adds "Chapter" to the chapter number
+	parskip=half*,
+	openright,
+	listof=totoc,
+	bibliography=totoc,
+	index=totoc,
+	toc=chapterentrywithdots,
+	numbers=noenddot
 ]{scrbook}
 
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel} % Changed from ngerman to english
-\usepackage{url}
-\usepackage[autostyle=true]{csquotes} % English quotes will be used automatically
+\usepackage[english]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage[autostyle=true]{csquotes}
 \usepackage{pdfpages}
 \usepackage{textcomp}
-\usepackage{amsmath} % math environment
+\usepackage{amsmath}
+
+% ------------------
+% |    Settings    |
+% ------------------
+% Load settings in correct order to avoid conflicts
+\input{settings/colors.tex}
+\input{settings/layout.tex}
+\input{settings/graphics.tex}
+\input{settings/tables.tex}
+\input{settings/listings.tex}
+\input{settings/commands.tex}
+\input{settings/bookmarks.tex}
 
 % ---------------------------
 % |    Meta-Data for PDF    |
@@ -28,58 +39,34 @@
   pdftex,
   pdfauthor={Jon Doe},
   pdftitle={Thesis Template},
-  pdfsubject={Bachelor Thesis}, % Changed from German
+  pdfsubject={Bachelor Thesis},
   pdfkeywords={Thesis;Template;LaTeX},
   pdfproducer={LaTeX},
   pdfcreator={pdfLaTeX},
-  pdfduplex={DuplexFlipLongEdge}, %Alt.: Simplex or DuplexFlipShortEdge 
-  pdflang={en}, % Changed from de to en
+  pdfduplex={DuplexFlipLongEdge},
+  pdflang={en},
   bookmarksopen,
   bookmarksnumbered,
 ]{hyperref}
 
-% ------------------
-% |    Settings    |
-% ------------------
-% Enhanced preamble section for true APA compliance
-% 1. Font setup (APA prefers Times New Roman) - OPTIONAL
-% \usepackage{newtxtext,newtxmath} % Uncomment for Times-like fonts
-
-% 2. Load bibliography settings AFTER hyperref
-\input{settings/bibliography.tex}
-
-% 3. Load other settings
-\input{settings/graphics.tex}
-\input{settings/tables.tex}
-\input{settings/colors.tex}
-\input{settings/layout.tex}
-\input{settings/listings.tex}
+% Load links settings after hyperref
 \input{settings/links.tex}
-\input{settings/commands}
-\input{settings/bookmarks}
 
-% 4. Additional APA-compliant settings
-\makeatletter
-% Ensure proper handling of citations
-\AtBeginDocument{%
-  \renewcommand{\cite}{\parencite}% Make \cite behave like \parencite
-}
-\makeatother
+% Load bibliography settings AFTER hyperref
+\input{settings/bibliography.tex}
 
 \begin{document}
 
 % -------------------
 % |    Titlepage    |
 % -------------------
-% \includepdf[pages=-,templatesize={145mm}{210mm},noautoscale=true,offset=-65 50]{myfile.pdf}
 \includepdf[pages={1},offset=25 -40]{chapters/deckblatt.pdf}
-% \input{chapters/titlepage} % Use latex title page
 
 % ------------------
 % |    Abstract    |
 % ------------------
 \cleardoubleoddpage	
-\pdfbookmark[section]{Abstract}{abstract} % Changed from Kurzfassung
+\pdfbookmark[section]{Abstract}{abstract}
 \input{chapters/abstract}
 \input{chapters/eid}
 
@@ -87,7 +74,7 @@
 % |    Table of contents    |
 % ---------------------------
 \cleardoubleoddpage	
-\pdfbookmark[section]{\contentsname}{toc} % toc is part of the bookmarks but not part the toc itself
+\pdfbookmark[section]{\contentsname}{toc}
 \newpage\thispagestyle{empty}
 {
   \pagestyle{empty}
@@ -128,10 +115,6 @@
 % ----------------------
 % |    Bibliography    |
 % ----------------------
-\printbibliography
-% \printbibheading[title=Literature]
-% \printbibliography[heading=subbibliography, type=online, title={Online}]
-% \printbibliography[heading=subbibliography, type=book, title={Literature}]
-% \printbibliography[heading=subbibliography,title={Other Sources},nottype=online,notkeyword=Norm,notkeyword=sekundaer]
+\printbibliography[heading=bibintoc,title={References}]
 
 \end{document}

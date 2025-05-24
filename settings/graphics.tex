@@ -3,6 +3,15 @@
 \graphicspath{ {images/} }
 \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.gif}
 
-% captions
+% APA 7 compliant captions - main configuration handled in tables.tex
+% This ensures consistency across figures and tables
 \usepackage{caption}
 \usepackage{subcaption}
+
+% Subcaption formatting for APA compliance
+\captionsetup[sub]{
+  font={normalsize},
+  labelfont={bf},
+  labelsep=period,
+  justification=justified
+}

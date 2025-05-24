@@ -2,9 +2,31 @@
 \setlength{\tabcolsep}{0.5em} % for the horizontal padding
 \renewcommand{\arraystretch}{1.2} % for the vertical padding
 
-% Table captions
+% APA 7 compliant table and figure caption formatting
 \usepackage{caption} 
-\captionsetup[table]{belowskip=12pt,aboveskip=4pt}
+\captionsetup{
+  format=hang,
+  font={normalsize},
+  labelfont={bf},
+  labelsep=period,
+  justification=justified,
+  singlelinecheck=false
+}
+
+% Specific settings for tables
+\captionsetup[table]{
+  belowskip=12pt,
+  aboveskip=4pt,
+  position=top
+}
+
+% Specific settings for figures  
+\captionsetup[figure]{
+  belowskip=4pt,
+  aboveskip=12pt,
+  position=bottom
+}
+
 \usepackage{diagbox}
 
 % Rotate tables

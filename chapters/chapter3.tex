@@ -1,12 +1,12 @@
 \chapter{Data and Feature Research}
 \label{ch:Data and Feature Research}
 
-This chapter examines the empirical foundation and methodological framework underpinning the analysis of NIP in European investment-grade corporate bonds. The investigation progresses from data acquisition and preprocessing through feature selection and model development to performance validation. Initially, the chapter explores the extraction and refinement of bond data from Refinitiv, addressing challenges related to data quality and temporal bias. Subsequently, a structured approach for identifying and evaluating potential predictive features is developed based on economic rationale and statistical significance. The analysis then constructs a machine learning framework using XGBoost that transforms these features into actionable investment signals, with particular attention to optimizing the precision-recall tradeoff for maximum investment utility. The chapter concludes with a comprehensive backtest methodology that validates the model's efficacy under realistic market conditions. Throughout this analytical progression, the research maintains a consistent focus on translating complex statistical patterns into practical investment insights for fixed-income portfolio management.
+This chapter examines the empirical foundation and methodological framework that underlie the analysis of NIP in European investment grade corporate bonds. The investigation progresses from data acquisition and preprocessing through feature selection and model development to performance validation. Initially, the chapter explores the extraction and refinement of bond data from Refinitiv, addressing challenges related to data quality and temporal bias. Subsequently, a structured approach is developed to identify and evaluate potential predictive characteristics based on economic rationale and statistical significance. The analysis then constructs a machine learning framework using XGBoost that transforms these features into actionable investment signals, with particular attention to optimizing the precision-recall trade-off for maximum investment utility. The chapter concludes with a comprehensive backtest methodology that validates the model's efficacy under realistic market conditions. Throughout this analytical progression, the research maintains a consistent focus on translating complex statistical patterns into practical investment insights for fixed-income portfolio management.
 
 \section{Data}
 \label{sec:Data}
 
-This study leverages comprehensive European corporate bond data extracted from the Refinitiv content layer API, which serves as the primary source for the training dataset employed in the machine learning algorithm. Refinitiv provides thorough coverage of fixed-income securities with detailed historical information, making it suitable for analyzing the new issue premium phenomenon in investment-grade bonds. The initial universe of bond data was obtained using specific filtering criteria to ensure relevance to the research objectives. The parameters applied in the extraction query are presented in Table \ref{tab:filter_criteria}.
+This study leverages comprehensive European corporate bond data extracted from the Refinitiv content layer API, which serves as the primary source for the training dataset used in the machine learning algorithm. Refinitiv provides thorough coverage of fixed income securities with detailed historical information, making it suitable for analyzing the new issue premium phenomenon in investment grade bonds. The initial universe of bond data was obtained using specific filtering criteria to ensure relevance to the research objectives. The parameters applied in the extraction query are presented in Table \ref{tab:filter_criteria}.
 
 \begin{table}[h]
     \centering
@@ -19,7 +19,7 @@ This study leverages comprehensive European corporate bond data extracted from t
          Principal Currency& EUR\\
          Issue Date& 1/1/2000 - 1/5/2025\\ \bottomrule
     \end{tabular}
-    \caption{\textbf{Comprehensive investment-grade bond selection criteria.}}
+    \caption{\textbf{Bond Selection Criteria for European Investment-Grade Corporate Bonds}}
     \label{tab:filter_criteria}
 \end{table}
 
@@ -31,7 +31,7 @@ A noticeable temporal bias exists in the data distribution, as illustrated in Fi
     \begin{center}
         \input{images/data_availability.pgf}
     \end{center}
-    \caption{\textbf{Temporal distribution of European corporate bond issuances.}}
+    \caption{\textbf{Temporal Distribution of European Corporate Bond Issuances in Dataset (2000-2025)}}
     \label{fig:data_availability}
 \end{figure}
 
@@ -81,7 +81,7 @@ Loser & Underperformer & 0 & 52.27\% & \ldots & 0 bp \\
 Winner & Moderate outperformer & 1 & 23.81\% & 0 bp & 51.01 bp \\
 Winner & Strong outperformer & 2 & 23.81\% & 51.01 bp & \ldots \\ \bottomrule
 \end{tabular}
-\caption{\textbf{Multi-tiered bond performance classification framework.}}
+\caption{\textbf{Performance Classification Framework for Bond Excess Returns}}
 \label{tab:performance_classification}
 \end{table}
 
@@ -129,10 +129,10 @@ The model optimization focuses on balancing precision and recall metrics, define
 Precision & Percentage of predicted outperformers correctly classified \\
 Recall & Percentage of actual outperformers correctly identified \\\bottomrule
 \end{tabular}
-\caption{\textbf{Predictive model performance evaluation metrics.}}
+\caption{Performance Evaluation Metrics for Predictive Model Assessment}
 \label{tab:precision_recall_definitions}
 \end{table}
-
+Z
 To achieve optimal investment performance, recall is de prioritized by introducing a threshold parameter $0 < w \leq 1$, which modifies the original probabilities $P(x)$ into adjusted probabilities $P_w(x)$:
 
 \begin{equation}
@@ -147,7 +147,7 @@ The signal construction framework provides the foundation for developing an opti
 
 The optimization seeks an optimal balance between precision and recall - specifically, the combination that maximizes overall investment utility - instead of solely maximizing precision at a fixed minimum recall. The optimization follows a two-step procedure that first establishes a robust probabilistic model and then identifies the optimal threshold parameter for investment decisions.
 
-The initial step involves hyperparameter tuning of the ternary XGBoost classifier to create a robust probabilistic model $M = (P, T, B)$. Hyperparameters represent configuration variables that govern the learning process itself - not derived from the data during training but set prior to training to control model complexity and behavior. These include regularization terms, tree depth constraints, and learning rates that collectively determine the model's capacity to generalize beyond training data \parencite[p.40]{harrison2023}. This optimization was conducted using Hyperopt, a Bayesian optimization framework that efficiently navigates the multidimensional parameter space through sequential evaluation of promising configurations. Unlike exhaustive search methods, Hyperopt employs probabilistic modeling to identify promising regions of the parameter space - progressively refining parameter estimates based on previous performance assessments and avoiding wasteful exploration of suboptimal configurations \parencite[pp. 85-87]{harrison2023}. This approach ensures systematic identification of optimal hyperparameters with significantly fewer evaluations, resulting in enhanced predictive performance. The first step establishes a classifier with maximal predictive performance, providing a strong foundation for the probability-based model $M_w = (P_w, T_w, B_w)$.
+The initial step involves hyperparameter tuning of the ternary XGBoost classifier to create a robust probabilistic model $M = (P, T, B)$. Hyperparameters represent configuration variables that govern the learning process itself - not derived from the data during training but set prior to training to control model complexity and behavior. These include regularization terms, tree depth constraints, and learning rates that collectively determine the model's capacity to generalize beyond training data \parencite[p.40]{Harrison2023EffectiveModels}. This optimization was conducted using Hyperopt, a Bayesian optimization framework that efficiently navigates the multidimensional parameter space through sequential evaluation of promising configurations. Unlike exhaustive search methods, Hyperopt employs probabilistic modeling to identify promising regions of the parameter space - progressively refining parameter estimates based on previous performance assessments and avoiding wasteful exploration of suboptimal configurations \parencite[pp. 85-87]{Harrison2023EffectiveModels}. This approach ensures systematic identification of optimal hyperparameters with significantly fewer evaluations, resulting in enhanced predictive performance. The first step establishes a classifier with maximal predictive performance, providing a strong foundation for the probability-based model $M_w = (P_w, T_w, B_w)$.
 
 The second step centers on model optimization targeting investment-related metrics - not directly optimizing standard classifier metrics such as precision or recall alone. This investment-driven approach is justified by several considerations. From a portfolio management perspective, the ultimate goal is to maximize actual investment outcomes. While higher precision improves potential returns, market participation, which is the proportion of new issues predicted as outperformers, remains relevant due to practical considerations including diversification, capital deployment, and stability of returns. As increasing precision typically reduces market participation due to the precision-recall trade-off, a balanced solution becomes necessary. Given the lower proportion of outperforming issuances in the dataset, the model naturally optimizes toward lower market participation (approximately 10\%) - reflecting a deliberate investment strategy that prioritizes higher precision through fewer, high-conviction positions.
 
@@ -198,7 +198,7 @@ This investment-driven objective provides a practical framework for feature sele
     \begin{center}
         \input{images/optimization_curve.pgf}
     \end{center}
-    \caption{\textbf{Investment utility maximization through parameter calibration.}}
+    \caption{Investment Utility Optimization Curve Showing Relationship Between Threshold Parameter and Combined Market Participation and Active Return}
     \label{fig:optimization_curve}
 \end{figure}
 
@@ -226,7 +226,7 @@ After each month's evaluation, the backtest moves forward by one month, retraini
     \begin{center}
         \includegraphics[width=\textwidth]{images/backtest_timeline.pdf}
     \end{center}
-    \caption{\textbf{Iterative model performance validation methodology.}}
+    \caption{Expanding-Window Cross-Validation Methodology for Model Performance Assessment}
     \label{fig:backtest_timeline}
 \end{figure}
 

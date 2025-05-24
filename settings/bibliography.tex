@@ -3,6 +3,22 @@
 % Language mapping for APA style
 \DeclareLanguageMapping{american}{american-apa}
 
+% APA 7 specific bibliography options
+\ExecuteBibliographyOptions{
+  sorting=nyt,
+  maxbibnames=20,
+  maxcitenames=2,
+  uniquelist=false,
+  doi=true,
+  url=true,
+  eprint=false
+}
+
+% Proper DOI formatting for APA 7
+\DeclareFieldFormat{doi}{%
+  \mkbibacro{DOI}\addcolon\space
+  \href{https://doi.org/#1}{\nolinkurl{#1}}}
+
 % URL breaking configuration for bibliography entries
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}

@@ -18,8 +18,8 @@ The strong contrast between the positive average excess return of first-time iss
     \begin{center}
         \input{images/FTI.pgf}
     \end{center}
-    \caption{First-time issuer effect showing excess returns for first-time vs. seasoned issuers}
-    \label{fig:data_availability}
+    \caption{Expected Excess Returns by Issuer Type: Comparison of First-Time Versus Seasoned Issuers}
+    \label{fig:fti}
 \end{figure}
 
 \subsection{Credit Risk Indicators}
@@ -56,11 +56,11 @@ The Z-spread feature demonstrated strong statistical significance at the 1\% lev
     \begin{center}
         \input{images/zPremium.pgf}
     \end{center}
-    \caption{Z-spread distance quintile vs. excess returns (bp)}
-    \label{fig:data_availability}
+    \caption{Expected Excess Returns Across Z-Spread Distance Quintiles Note. Returns measured in basis points (bp).}
+    \label{fig:z_premium}
 \end{figure}
 
-This non-monotonic relationship aligns with recent research by \textcite{Dickerson2024Factor}, who found that bonds with extremely wide spreads tend to underperform relative to moderately high-spread peers in the near term. This may occur because "cheap" high-spread issues carry elevated downgrade risk and lower liquidity, eroding their short-term return advantage.
+This non-monotonic relationship aligns with recent research by \textcite{Dickerson2024FactorDelays}, who found that bonds with extremely wide spreads tend to underperform relative to moderately high-spread peers in the near term. This may occur because "cheap" high-spread issues carry elevated downgrade risk and lower liquidity, eroding their short-term return advantage.
 
 \subsubsection{}{Credit Rating}
 Credit ratings provide standardized assessments of issuer default risk \parencite[pp. 26 - 28]{Fabozzi2021TheEdition}. Analysis of the EUR investment-grade market reveals that credit rating is a significant predictor of excess returns at the 1\% level.
@@ -87,7 +87,7 @@ Bond liquidity is an important determinant of investor demand and subsequent pri
 
 $$\text{Liquidity Score} = \frac{\ln(\text{Issue Size})}{\text{Bid-Ask Spread}}$$
 
-This metric captures non-linear liquidity effects through logarithmic size scaling while inversely weighting transaction costs. This approach is validated by \textcite{Reichenbacher2018UniversityDiscussant}, who demonstrate that size-adapted liquidity measures significantly improve explanatory power in asset pricing models. The liquidity score exhibited statistical significance at the 5\% level and showed a distinctive inverted U-shaped pattern when plotted against excess returns. Bonds in the lowest liquidity quintile significantly underperformed, while those in moderate liquidity quintiles (quintile 2 and 3) exhibited the highest positive returns.
+This metric captures non-linear liquidity effects through logarithmic size scaling while inversely weighting transaction costs. This approach is validated by \textcite{Reichenbacher2018Size-AdaptedImplications}, who demonstrate that size-adapted liquidity measures significantly improve explanatory power in asset pricing models. The liquidity score exhibited statistical significance at the 5\% level and showed a distinctive inverted U-shaped pattern when plotted against excess returns. Bonds in the lowest liquidity quintile significantly underperformed, while those in moderate liquidity quintiles (quintile 2 and 3) exhibited the highest positive returns.
 
 \subsection{Price at Issuance}
 In the investment-grade market, bonds issued at a significant discount typically signal a stressed environment where the underwriter is "sweetening" the offer to attract investors. This implies an additional premium to compensate for perceived risks \parencite{Geerts2022PredictingYield}.
@@ -134,7 +134,7 @@ The categorical analysis demonstrated a clear pattern: bonds issued during perio
     \begin{center}
         \input{images/consumption.pgf}
     \end{center}
-    \caption{Consumption effect on excess returns}
+    \caption{Expected Excess Returns Across Consumer Consumption Index Quintiles Note. Returns measured in basis points (bp).}
     \label{fig:consumption}
 \end{figure}
 
@@ -158,7 +158,7 @@ When plotted against excess return quintiles, equity market direction showed a p
     \begin{center}
         \input{images/european_market_direction.pgf}
     \end{center}
-    \caption{Market direction effect on excess returns}
+    \caption{Expected Excess Returns Across European Market Direction Quintiles for Equity and Investment-Grade Credit Markets Note. Returns measured in basis points (bp).}
     \label{fig:eu_direction}
 \end{figure}
 

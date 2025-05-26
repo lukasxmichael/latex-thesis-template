@@ -60,31 +60,40 @@
 % -------------------
 % |    Titlepage    |
 % -------------------
+% Title page should have no page number
+\pagenumbering{gobble}  % Suppress page numbering
 \input{chapters/titlepage.tex}
+\cleardoublepage
 
 % ------------------
 % |    Abstract    |
 % ------------------
+% Start roman numbering for preliminary pages
 \pagenumbering{roman}
 \setcounter{page}{1}
 \pdfbookmark[section]{Kurzfassung}{abstract}
 \input{chapters/abstract}
+\cleardoublepage
 
 % ---------------------------
 % |    Table of contents    |
 % ---------------------------
 \pdfbookmark[section]{\contentsname}{toc}
 \tableofcontents
+\cleardoublepage
 
 % -----------------
 % |    Indexes    |
 % -----------------
 \listoffigures
+\cleardoublepage
 \listoftables
+\cleardoublepage
 
 % ------------------
 % |    Chapters    |
 % ------------------
+% Start arabic numbering for main content
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \input{chapters/chapter1}
@@ -94,22 +103,25 @@
 \input{chapters/chapter5}
 \input{chapters/chapter6}
 
+% ----------------------
+% |    Bibliography    |
+% ----------------------
+% Continue with arabic numbering for references (standard APA)
+\printbibliography[title=References]
+
 % ------------------
 % |    Appendix    |
 % ------------------
+% Switch to roman numbering for appendix as requested
 \appendix
-\pagenumbering{Roman}
+\pagenumbering{roman}
 \setcounter{page}{1}
 \input{chapters/appendix}
 
 % ----------------------
-% |    Bibliography    |
-% ----------------------
-\printbibliography[title=References]
-
-% ----------------------
 % |    Declarations    |
 % ----------------------
+% Continue with roman numbering
 \input{chapters/ai}
 \input{chapters/eid}
 
